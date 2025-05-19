@@ -1,10 +1,8 @@
-import Student from './Student.jsx'
+import MyComponent from './MyComponent.jsx';
 
 function App() {
   return(
-    <>
-      <Student name="Spongebob" age={30}/>
-    </>
+    <MyComponent/>
   );
 }
 
