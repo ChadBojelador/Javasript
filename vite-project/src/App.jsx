@@ -1,11 +1,6 @@
-import Student from "./student/Students"
-
+import List from "./List.jsx"
 function App() {
-  return (
-    <>
-      <Student name="Spongebob" age="18" isStudent={true}/>
-    </>
-  )
+  return (<List></List>);
 }
 
 export default App
