@@ -69,28 +69,53 @@ header{
   
 }
 
-.header-container2{
-  display: flex;
-}
+
 
 section{
     margin-top: 5em;
     margin-left: 7vw;
 }
-
+.header-container2{
+  display: flex;
+}
 aside{
   position: sticky;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
     height: 80vh;
     width: 50vh;
     margin-left: 10vw;
-    margin-top: 5em;
+    margin-top: 7vh;
     background-color: #ffffff;
     border-radius: 1em;
-    padding-top: 4vh;
+
 }
 .picture{
-  height: 46vh;
-  width: 17vw;
+  height: 49vh;
+  width: 18vw;
   border-radius:1.2em;
+}
+.description-pic{
+  font-family: 'Poppins';
+  margin-top: 0;
+  padding-top: 0;
+  display: flex;
+  gap: 0;
+  flex-direction: column;
+  justify-content: center;
+}
+.description-pic h1{
+  text-align: center;
+  font-size: 2vw;
+  margin-top: 0;
+  padding-top: 0;
+}
+.description-pic p{
+    font-weight: 500;
+    margin-top: 0;
+     padding-top: 0;
+     color: #737576;
+     text-align: center;
 }

@@ -34,12 +34,20 @@ function App() {
       <div className="header-container2">
         <aside>
           <img className="picture"src={picture}/>
-          <h1 className='name'>Chad Bojelador</h1>
+            <div className='description-pic'>  
+            <h1 className='name'>Chad Bojelador</h1>
+            <p>A Software Developer as well as a Bachelor of Science in Information Technology.</p>
+            </div>
+
+        
         </aside>
         <section>
           <div className='title-container'>
             <h1 className='Title'>SOFTWARE</h1>
             <h1 className='Title' id='title1'>DEVELOPER</h1>
+            <p>Passionate about building impactful software that blends functionality </p>
+            <p>with exceptional user experience. I specialize in crafting digital </p>
+              <p>products that people love to use.</p>
           </div>
         </section>
       </div>
