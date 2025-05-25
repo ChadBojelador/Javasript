@@ -2,6 +2,7 @@
 
 body {
   background-color: rgb(21, 19, 18);
+  overflow: hidden;
 }
 
 
@@ -58,9 +59,22 @@ header{
   line-height: 0em;
   padding-top: 2em;
 }
+.title-container p{
+  color: #99908f;
+  font-size: 2vw;
+}
 #title1{
   display: flex;
   color: #353334;
+}
+.p-container{
+  width: 35vw;
+}
+.p-container p {
+  font-size: 1.2rem; /* Changed from fixed 15px */
+  font-family: 'Poppins';
+  line-height: 1; /* Added for better readability */
+  margin: 0.5rem 0; /* Added spacing between paragraphs */
 }
 
 .header-container{
@@ -72,11 +86,29 @@ header{
 
 
 section{
-    margin-top: 5em;
+   padding: 20px;
+    margin-top: 4vh;
     margin-left: 7vw;
+      flex: 1;
+    height: 100vh; /* Adjust based on your header height */
+  overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 .header-container2{
   display: flex;
+  margin-top: 6vh;
+}
+.content-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding-bottom: 4rem;
+}
+
+.content-part {
+  min-height: 100vh;
+  padding: 2rem;
+  color: white;
 }
 aside{
   position: sticky;
@@ -84,18 +116,27 @@ aside{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-    height: 80vh;
+    height: 100vh;
     width: 50vh;
     margin-left: 10vw;
-    margin-top: 7vh;
+    margin-top: 5vh;
     background-color: #ffffff;
     border-radius: 1em;
-
+ pointer-events: none;
+  top: 0;
+  align-self: flex-start;
+  height: calc(100vh - 10rem); /* Adjust based on your header height */
+  overflow-y: visible;
+  height: auto;
+}
+aside * {
+  pointer-events: auto;
 }
 .picture{
   height: 49vh;
   width: 18vw;
   border-radius:1.2em;
+  margin-top: 5vh;
 }
 .description-pic{
   font-family: 'Poppins';
@@ -118,4 +159,165 @@ aside{
      padding-top: 0;
      color: #737576;
      text-align: center;
+
+}
+
+.header-container2 {
+  display: flex;
+  gap: 2rem;
+  position: relative;
+}
+
+/* Add this at the end of your CSS file */
+/* components/CustomCursor.css */
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, 
+    rgba(255,255,255,0.9) 0%,
+    rgba(255,255,255,0.6) 50%,
+    rgba(255,255,255,0.3) 100%
+  );
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 9999;
+  transition: 
+    transform 0.15s ease-out,
+    opacity 0.2s ease,
+    width 0.2s ease,
+    height 0.2s ease;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-trail {
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, 
+    rgba(255,255,255,0.4) 0%,
+    rgba(255,255,255,0.2) 50%,
+    rgba(255,255,255,0) 70%
+  );
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 9998;
+  transition: 
+    transform 0.3s cubic-bezier(0.15, 0.85, 0.35, 1.1),
+    opacity 0.3s ease;
+  transform: translate(-50%, -50%);
+  filter: blur(2px);
+}
+
+@media (pointer: coarse) {
+  .cursor,
+  .cursor-trail {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+    body {
+    overflow: auto;
+  }
+  .header-container2 {
+    flex-direction: column;
+    height: auto;
+  }
+
+  aside {
+    position: static;
+    width: 90%;
+    height: auto;
+    margin: 2em auto 0;
+    padding: 20px;
+    pointer-events: auto;
+  }
+
+  .picture {
+    width: 50%;
+    height: auto;
+    max-width: 200px;
+  }
+
+  section {
+     height: auto;
+    overflow: visible;
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .Title {
+    font-size: 10vw;
+  }
+
+  #title1 {
+    -webkit-text-stroke: 1px #353334;
+  }
+
+  .title-container p {
+    font-size: 4vw;
+  }
+
+  .p-container {
+    width: 100%;
+  }
+
+  .description-pic h1 {
+    font-size: 1.5rem;
+  }
+
+  .description-pic p {
+    font-size: 1rem;
+  }
+
+  /* Optional: Improve nav items for mobile */
+  .list {
+    width: 40px;
+    height: 40px;
+  }
+
+  nav {
+    padding-right: 0;
+    margin-top: 1vh;
+  }
+
+  .p-container p {
+    font-size: 1rem; /* Adjust for mobile */
+    line-height: 1.6; /* Better mobile readability */
+    max-width: 90%; /* Prevent edge-to-edge text */
+    margin: 0.8rem auto; /* Center align and add spacing */
+  }
+
+  /* Add this to handle text wrapping */
+  .title-container {
+    overflow-wrap: break-word;
+    word-break: keep-all;
+  }
+   .header-container2 {
+    flex-direction: column;
+     height: 100vh;
+  }
+
+  aside {
+    position: static;
+    height: auto;
+    width: 100%;
+    margin: 1rem 0;
+  }
+
+  section {
+    height: auto;
+    margin: 0;
+    overflow-y: visible;
+  }
+
+  .content-part {
+    min-height: auto;
+    padding: 2rem 1rem;
+  }
+
 }
