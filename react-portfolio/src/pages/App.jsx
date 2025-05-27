@@ -1,19 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import home from './assets/homeIcon.svg';
-import folderIcon from './assets/folder.svg';
-import certificateIcon from './assets/certificates.svg';
-import toolsIcon from './assets/tools.svg';
-import aboutIcon from './assets/about.svg';
-import picture from './assets/picture.svg';
-import CustomCursor from './CustomCursor';
-
-const navItems = [
-  { icon: home, alt: "Home", className: "home" },
-  { icon: folderIcon, alt: "Projects", className: "folder" },
-  { icon: certificateIcon, alt: "Certificates", className: "certificate" },
-  { icon: toolsIcon, alt: "Tools", className: "tools" },
-  { icon: aboutIcon, alt: "About", className: "about" },
-];
+import { Link } from 'react-router-dom';
+import picture from '../assets/picture.svg';
+import CustomCursor from '../Components/CustomCursor';
+import Navigation from '../Components/Navigation';
 
 function App() {
   useEffect(() => {
@@ -25,21 +14,7 @@ function App() {
     <div className="App">
       <CustomCursor />
       <div className="header-container">
-        <header>
-          <nav>
-            <ul className="list-container">
-              {navItems.map((item, index) => (
-                <li className="list" key={index}>
-                  <img
-                    className={`icon icon-${item.className}`}
-                    src={item.icon}
-                    alt={item.alt}
-                  />
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </header>
+        <Navigation></Navigation>
 
         <div className="header-container2">
           <aside>
@@ -59,6 +34,41 @@ function App() {
                 <p>with intuitive design and seamless functionality.</p>
               </div>
             </div>
+      <div className='boxes'>
+  <div className='box box-1'>
+    <p>ReactJS</p>
+  </div>
+  <div className='box box-2'>
+    <p>C++</p>
+  </div>
+  <div className='box box-3'>
+    <p>Java</p>
+  </div>
+  <div className='box box-4'>
+    <p>Python</p>
+  </div>
+  <div className='box box-5'>
+    <p>Qt</p>
+  </div>
+  <div className='box box-6'>
+    <p>MySQL</p>
+  </div>
+  <div className='box box-7'>
+    <p>NodeJS</p>
+  </div>
+  <div className='box box-8'>
+    <p>HTML</p>
+  </div>
+  <div className='box box-9'>
+    <p>CSS</p>
+  </div>
+  <div className='box box-10'>
+    <p>Javascript</p>
+  </div>
+  <div className='box box-11'>
+    <p>Tailwind</p>
+  </div>
+</div>
           </section>
         </div>
       </div>
