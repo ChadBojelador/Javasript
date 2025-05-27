@@ -11,7 +11,7 @@ const navItems = [
   { icon: folderIcon, alt: "Projects", className: "folder", label: "Projects", path: "/projects" },
   { icon: certificateIcon, alt: "Certificates", className: "certificate", label: "Certificates", path: "#" },
   { icon: toolsIcon, alt: "Tools", className: "tools", label: "Tools", path: "#" },
-  { icon: aboutIcon, alt: "About", className: "about", label: "About", path: "#" },
+  { icon: aboutIcon, alt: "About", className: "about", label: "About", path: "/About" },
 ];
 
 const Navigation = () => (

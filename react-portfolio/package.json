@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@motionone/dom": "^10.18.0",
+    "framer-motion": "^12.14.0",
+    "motion-plus": "^0.1.9",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.0"

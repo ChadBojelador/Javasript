@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import '../Styles/Projects.css';
 import CustomCursor from '../Components/CustomCursor';
 import Navigation from '../Components/Navigation';
-
+import { motion } from 'framer-motion';
 
 const projectsData = [
   {
@@ -32,49 +32,61 @@ const projectsData = [
     image: "project3.jpg"
   }
 ];
-
+// Projects.jsx (updated)
 const Projects = () => {
   useEffect(() => {
     document.body.style.cursor = 'none';
     return () => document.body.style.cursor = 'default';
   }, []);
+
   return (
     <div className="App">
       <CustomCursor />
       <div className="header-container">
         <Navigation />
-    <section className="projects-section">
-      <h2 className="section-title">Featured Projects</h2>
-      <div className="projects-grid">
-        {projectsData.map((project, index) => (
-          <article className="project-card" key={index}>
-            <div className="project-image">
-              <img src={project.image} alt={project.title} />
-            </div>
-            <div className="project-content">
-              <h3 className="project-title">{project.title}</h3>
-              <p className="project-description">{project.description}</p>
-              <div className="project-tech">
-                {project.tech.map((tech, techIndex) => (
-                  <span className="tech-tag" key={techIndex}>{tech}</span>
-                ))}
-              </div>
-              <div className="project-links">
-                <a href={project.demoLink} className="demo-link">
-                  Live Demo
-                </a>
-                <a href={project.codeLink} className="code-link">
-                  View Code
-                </a>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
+        <section className="projects-section">
+          <h2 className="section-title">Featured Projects</h2>
+          <div className="projects-grid">
+    {projectsData.map((project, index) => (
+  <motion.article
+    key={index}
+    className="project-card"
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    transition={{ duration: 0.6 }}
+  >
+                <div className="project-image-container">
+                  <img src={project.image} alt={project.title} />
+                  <div className="image-overlay" />
+                </div>
+                <div className="project-content">
+                  <div className="project-header">
+                    <h3 className="project-title">{project.title}</h3>
+                    <p className="project-description">{project.description}</p>
+                  </div>
+                  <div className="project-footer">
+                    <div className="tech-stack">
+                      {project.tech.map((tech, techIndex) => (
+                        <span className="tech-tag" key={techIndex}>{tech}</span>
+                      ))}
+                    </div>
+                    <div className="project-actions">
+                      <a href={project.demoLink} className="demo-link">
+                        Live Demo <span className="arrow">→</span>
+                      </a>
+                      <a href={project.codeLink} className="code-link">
+                        Source Code <span className="arrow">↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                </motion.article>
+            ))}
           </div>
+        </section>
+      </div>
     </div>
   );
 };
-
 export default Projects;
