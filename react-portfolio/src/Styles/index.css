@@ -4,7 +4,12 @@ body {
   background-color: rgb(21, 19, 18);
 
 }
-
+body::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
+}
+section::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
+}
 nav {
   background-color: rgba(255, 255, 255, 0.03);
   display: flex; /* Changed from 'block' */
@@ -101,7 +106,7 @@ section{
       flex: 1;
     height: 100vh; /* Adjust based on your header height */
   overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
 }
 .header-container2{
   display: flex;

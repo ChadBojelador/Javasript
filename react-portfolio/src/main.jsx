@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './pages/App.jsx';
 import './Styles/index.css';
 import Projects from './pages/Projects.jsx';
-import About from './pages/About.jsx';
+import About from './pages/ContactPage.jsx';
 import Certificates from './pages/Certificates.jsx';
 import Tools from './pages/Tools.jsx';
 const router = createBrowserRouter([
