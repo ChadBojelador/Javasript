@@ -1,51 +1,72 @@
-/* Projects.css (updated) */
+/* Projects.css - Enhanced Version */
 .projects-section {
-  padding: 4rem 2rem;
+  padding: 6rem 2rem;
   max-width: 1440px;
   margin: 0 auto;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 24px 24px;
+  position: relative;
+  overflow: hidden;
 }
 
-.section-title {
-  font-size: 3.5rem;
-  color: #fff;
-  margin-bottom: 4rem;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-}
-.project-meta {
+/* ===== SECTION TITLE ===== */
+.section-title-container {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  justify-content: center;
+  margin-bottom: 5rem;
 }
 
-.project-category::before {
-  content: "▹";
-  margin-right: 0.5rem;
-  color: #f46c38;
+.section-title h2 {
+  font-size: 4rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-align: center;
+  background: linear-gradient(90deg, #ffffff, #f46c38, #4a9fff);
+  background-size: 200% auto;
+
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 8s ease infinite;
 }
+
+.split-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== PROJECTS GRID ===== */
 .projects-grid {
   display: grid;
   gap: 3rem;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
 }
 
+/* ===== PROJECT CARD ===== */
 .project-card {
+  position: relative;
   background: rgba(255, 255, 255, 0.03);
   border-radius: 24px;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transform-style: preserve-3d;
 }
 
-.project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.25);
+.parallax-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  pointer-events: none;
 }
 
 .project-image-container {
@@ -61,31 +82,37 @@
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.project-card:hover img {
-  transform: scale(1.05);
-}
-
 .image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  background: linear-gradient(
+    180deg, 
+    rgba(0, 0, 0, 0) 0%, 
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  z-index: 1;
 }
 
 .project-content {
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(15, 15, 25, 0.7);
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(8px);
 }
 
+/* ===== CARD CONTENT ELEMENTS ===== */
 .project-header {
   margin-bottom: 1.5rem;
 }
 
 .project-title {
-  font-size: 1.5rem;
-  color: #fff;
-  margin-bottom: 0.75rem;
+  font-size: 1.6rem;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin-bottom: 0.75rem;
 }
 
 .project-description {
@@ -93,6 +120,20 @@
   font-size: 1rem;
   line-height: 1.6;
   margin-bottom: 1rem;
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.project-category::before {
+  content: "▹";
+  margin-right: 0.5rem;
+  color: #f46c38;
 }
 
 .tech-stack {
@@ -111,16 +152,19 @@
   font-weight: 500;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
 }
 
+/* ===== ACTION BUTTONS ===== */
 .project-actions {
   display: flex;
   gap: 1rem;
   align-items: center;
 }
 
-.demo-link, .code-link {
-  padding: 0.75rem 1.5rem;
+.demo-link, 
+.code-link {
+  padding: 0.75rem 1.75rem;
   border-radius: 8px;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -128,60 +172,49 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  font-size: 1rem;
 }
 
-.demo-link, .code-link {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.demo-link {
+  background: linear-gradient(90deg, #f46c38, #ff5e62);
+  color: white;
 }
 
-.demo-link:hover {
-  box-shadow: 0 8px 24px -4px rgba(244, 108, 56, 0.3);
-}
-
-.code-link:hover {
-  box-shadow: 0 8px 24px -4px rgba(255, 255, 255, 0.1);
-}
 .code-link {
   background: rgba(255, 255, 255, 0.08);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-
-.arrow {
-  transition: transform 0.3s ease;
+/* ===== INTERACTIVE STATES ===== */
+.project-card:hover {
+  transform: translateY(-8px) rotateX(2deg);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.35);
 }
 
-.demo-link:hover .arrow {
-  transform: translateX(2px);
+.project-card:hover img {
+  transform: scale(1.05);
 }
 
-.code-link:hover .arrow {
-  transform: translate(2px, -2px);
-}
-/* Add to Projects.css */
-.project-card {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+.demo-link:hover {
+  box-shadow: 0 8px 24px -4px rgba(244, 108, 56, 0.4);
+  transform: translateY(-2px);
 }
 
-.tech-tag {
-  transition: background 0.2s ease;
-}
-.image-overlay {
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
+.code-link:hover {
+  box-shadow: 0 8px 24px -4px rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
 }
 
-.project-card:hover .image-overlay {
-  opacity: 0.95;
-}
 .tech-tag:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
 }
-/* Responsive Design */
+
+/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
-  .section-title {
-    font-size: 2.5rem;
+  .section-title h2 {
+    font-size: 2.8rem;
   }
 
   .projects-grid {
@@ -194,11 +227,21 @@
 
   .project-actions {
     flex-direction: column;
-    width: 100%;
   }
 
-  .demo-link, .code-link {
+  .demo-link, 
+  .code-link {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-section {
+    padding: 4rem 1.5rem;
+  }
+  
+  .section-title h2 {
+    font-size: 2.4rem;
   }
 }
