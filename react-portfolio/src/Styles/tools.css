@@ -1,0 +1,93 @@
+/* Tools Page Specific Styles */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.tool-card {
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 1.5rem;
+  border-radius: 1em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease-in-out;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: #fff;
+}
+.title-tool{
+    font-family: 'Poppins';
+    font-size: 10vh;
+    color: #fff;
+}
+.tool-card:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.category-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(45deg, #fff, #99908f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, #fff, #99908f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-head {
+    color: #fff;
+    font-family: 'Poppins';
+    font-size: 15vh; /* Reduced from 20vh */
+    margin: 2rem 0;
+    padding-top: 8rem;
+}
+
+/* Animation Enhancements */
+.animate-block {
+  opacity: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .category-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .tool-card {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+      .text-head {
+        font-size: 10vh;
+        margin: 1.5rem 0;
+    }
+
+}
+
+@media (max-width: 480px) {
+  .category-title {
+    font-size: 1.5rem;
+  }
+  
+  .tool-card {
+    font-size: 0.85rem;
+  }
+  .text-head {
+        font-size: 8vh;
+    }
+
+}

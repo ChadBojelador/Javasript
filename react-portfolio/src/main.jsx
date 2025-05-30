@@ -6,6 +6,8 @@ import App from './pages/App.jsx';
 import './Styles/index.css';
 import Projects from './pages/Projects.jsx';
 import About from './pages/About.jsx';
+import Certificates from './pages/Certificates.jsx';
+import Tools from './pages/Tools.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
     {
     path: "/about",
     element: <About />,
+  },
+  {
+    path: "/certificates",
+    element: <Certificates />,
+  },
+    {
+    path: "/tools",
+    element: <Tools />,
   },
 ]);
 

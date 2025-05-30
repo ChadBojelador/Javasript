@@ -6,7 +6,7 @@ import picture from '../assets/picture.svg';
 import CustomCursor from '../Components/CustomCursor';
 import Navigation from '../Components/Navigation';
 import Tagline from '../Components/Tagline';
-
+import Signages from '../Components/Signages';
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -113,7 +113,7 @@ function App() {
                 </motion.div>
               ))}
             </motion.div>
-
+      <Signages></Signages>
             <motion.div
               variants={containerVariants}
               initial="hidden"
@@ -121,7 +121,9 @@ function App() {
             >
               <Tagline />
             </motion.div>
+      
           </section>
+          
         </div>
       </motion.div>
     </div>

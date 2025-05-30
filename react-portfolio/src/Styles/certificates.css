@@ -1,0 +1,77 @@
+/* Certificates Page Styles */
+.certificates-page {
+  padding: 2rem;
+  min-height: 100vh;
+  background: #f5f5f7;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  color: #1d1d1f;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.certificates-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.certificate-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-content h3 {
+  font-size: 1.2rem;
+  color: #1d1d1f;
+  margin-bottom: 0.75rem;
+}
+
+.issuer-date {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.issuer {
+  color: #86868b;
+  font-weight: 500;
+}
+
+.date {
+  color: #515154;
+}
+
+.description {
+  color: #1d1d1f;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.credential-id {
+  padding-top: 1rem;
+  border-top: 1px solid #d2d2d7;
+  font-size: 0.8rem;
+}
+
+.credential-id span {
+  color: #86868b;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.credential-id code {
+  color: #515154;
+  word-break: break-all;
+}

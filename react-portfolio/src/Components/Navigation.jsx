@@ -9,8 +9,8 @@ import aboutIcon from '../assets/about.svg';
 const navItems = [
   { icon: home, alt: "Home", className: "home", label: "Home", path: "/" },
   { icon: folderIcon, alt: "Projects", className: "folder", label: "Projects", path: "/projects" },
-  { icon: certificateIcon, alt: "Certificates", className: "certificate", label: "Certificates", path: "#" },
-  { icon: toolsIcon, alt: "Tools", className: "tools", label: "Tools", path: "#" },
+  { icon: certificateIcon, alt: "Certificates", className: "certificate", label: "Certificates", path: "/certificates" },
+  { icon: toolsIcon, alt: "Tools", className: "tools", label: "Tools", path: "/Tools" },
   { icon: aboutIcon, alt: "About", className: "about", label: "About", path: "/About" },
 ];
 
