@@ -3,7 +3,7 @@
 import { animate, stagger } from "@motionone/dom"
 import { splitText } from "motion-plus"
 import { useEffect, useRef } from "react"
-
+import '../Styles/tagline.css'
 export default function SplitText() {
     const containerRef = useRef(null)
 
@@ -45,32 +45,8 @@ export default function SplitText() {
             <h1 className="tagline-text">
                 Fueled by curiosity. Powered by logic. Focused on impact.
             </h1>
-            <Stylesheet />
+
         </div>
     )
 }
 
-function Stylesheet() {
-    return (
-        <style>{`
-            .tagline-container {
-                width: 100%;
-                margin: 2rem 0;
-                visibility: hidden;
-            }
-
-            .tagline-text {
-                font-size: 1.25rem;
-                line-height: 1.6;
-                color: #333;
-                text-align: center;
-            }
-
-            .split-word {
-                display: inline-block;
-                will-change: transform, opacity;
-                white-space: nowrap;
-            }
-        `}</style>
-    )
-}

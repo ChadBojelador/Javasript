@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../Styles/contact.css';
 import Navigation from '../Components/Navigation';
+import emailjs from 'emailjs-com'; 
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const ContactPage = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState(''); 
   const timeoutRef = useRef(null);
   
   const handleChange = (e) => {
@@ -18,33 +20,38 @@ const ContactPage = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    
-    // Clear any existing timeout
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    
-    // Reset form after submission
-    timeoutRef.current = setTimeout(() => {
+    setError('');
+
+    try {
+      await emailjs.send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        formData,
+        process.env.REACT_APP_EMAILJS_USER_ID
+      );
+      
+      setIsSubmitted(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
-      setIsSubmitted(false);
+      
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      
+      timeoutRef.current = setTimeout(() => {
+        setIsSubmitted(false);
+        setIsSubmitting(false);
+      }, 3000);
+    } catch (err) {
+      console.error('Email failed to send:', err);
+      setError('Failed to send message. Please try again.');
       setIsSubmitting(false);
-    }, 3000);
+    }
   };
 
-  // Cleanup timeout on component unmount
   useEffect(() => {
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
 
@@ -68,7 +75,7 @@ const ContactPage = () => {
               </div>
               <div className="contact-details">
                 <h3>Email</h3>
-                <p>chad.bojelador@example.com</p>
+                <p>slsuls.chadbojelador@gmail.com</p>
               </div>
             </div>
             
@@ -80,7 +87,7 @@ const ContactPage = () => {
               </div>
               <div className="contact-details">
                 <h3>Phone</h3>
-                <p>+1 (123) 456-7890</p>
+                <p>(+63) 9090255388</p>
               </div>
             </div>
             
@@ -168,6 +175,12 @@ const ContactPage = () => {
               {isSubmitted && (
                 <div className="success-message" role="alert" aria-live="polite">
                   Message sent successfully! I'll get back to you soon.
+                </div>
+              )}
+              
+              {error && (
+                <div className="error-message" role="alert" aria-live="assertive">
+                  {error}
                 </div>
               )}
             </form>

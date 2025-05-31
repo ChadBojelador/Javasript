@@ -1,0 +1,21 @@
+
+            .tagline-container {
+                width: 30%;
+                margin: 2rem 0;
+                visibility: hidden;
+                display: flex;
+                border-right: 1px solid #737576;
+            }
+
+            .tagline-text {
+                font-size: 1.25rem;
+                line-height: 1.6;
+                color: #ffffff;
+
+                font-family: 'Poppins';}
+
+            .split-word {
+                display: inline-block;
+                will-change: transform, opacity;
+                white-space: nowrap;
+            }

@@ -12,6 +12,8 @@
   "dependencies": {
     "@flaticon/flaticon-uicons": "^3.3.1",
     "@motionone/dom": "^10.18.0",
+    "dotenv": "^16.5.0",
+    "emailjs-com": "^3.2.0",
     "framer-motion": "^12.14.0",
     "motion-plus": "^0.1.9",
     "react": "^19.1.0",
