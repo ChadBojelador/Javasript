@@ -1,144 +1,182 @@
-// routes/Certificates.jsx
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import '../Styles/certificates.css';
 import Navigation from '../Components/Navigation';
-import '../Styles/Certificates.css';
-
-const certificates = [
-  {
-    title: "Software & Development Design Thinking",
-    issuer: "DICT Region 10",
-    date: "April 2025",
-    description: "Advanced concepts in software design and user-centric development approaches",
-    image: "/images/cert1.jpg"
-  },
-  {
-    title: "Mastering Programming & Data Analysis",
-    issuer: "Batangas State University",
-    date: "October 2024",
-    description: "Power BI integration and LMS tools for data visualization",
-    image: "/images/cert2.jpg"
-  },
-  {
-    title: "HTML/CSS Certification",
-    issuer: "Udemy",
-    date: "September 2023",
-    description: "From basic markup to advanced responsive design techniques",
-    credential: "UC-3cc92b04-07ce-46c8-b9c1-a1ddd2553b0b",
-    image: "/images/cert3.jpg"
-  }
-];
+import CustomCursor from '../Components/CustomCursor';
 
 const Certificates = () => {
-  const [selectedId, setSelectedId] = useState(null);
+  useEffect(() => {
+    // Certificate card animation on scroll
+    const certCards = document.querySelectorAll('.cert-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    certCards.forEach(card => {
+      card.style.opacity = 0;
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(card);
+    });
+    
+    return () => {
+      certCards.forEach(card => observer.unobserve(card));
+    };
+  }, []);
 
   return (
-    <div className="certificates-page">
-      <Navigation />
+    <div className="cert-container">
+      {/* Floating decorative elements */}
+      <div className="floating">{'{ }'}</div>
+      <div className="floating">;</div>
+      <div className="floating">( )</div>
+      <div className="floating">[ ]</div>
+      <CustomCursor></CustomCursor>
+      <section className="hero">
+        <Navigation></Navigation>
+        <h1>My Certificates</h1>
+        <p>Professional certifications and achievements demonstrating expertise across various technologies</p>
+      </section>
       
-      <motion.div 
-        className="certificates-container"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1 className="page-title">Certificates</h1>
+      <div className="cert-grid">
+        {/* Certificate 1 */}
+        <div className="cert-card">
+          <div className="cert-header">
+            <h2>Cloud Support Associate Professional Certificate</h2>
+            <div className="cert-issuer">Amazon Web Services</div>
+            <div className="cert-date">Issued: June 2025</div>
+          </div>
+          <div className="cert-body">
+            <p className="cert-desc">ChatGPT said:
+The Cloud Support Associate Professional Certificate is a credential that validates foundational skills in cloud computing and technical support for cloud-based services.</p>
+            <div className="cert-tags">
+              <span className="cert-tag box-1">AWS</span>
+              <span className="cert-tag box-2">Lambda</span>
+              <span className="cert-tag box-3">EC2</span>
+              <span className="cert-tag box-4">Cloud Computing</span>
+            </div>
+          </div>
+          <div className="cert-footer">
+            <a href="https://coursera.org/share/fd015331f34ec11cab574fe2bd568a02" className="cert-link">View Certificate ↗</a>
+            <span className="cert-id">ID: VUKTCP8KRWZK</span>
+          </div>
+        </div>
         
-        <motion.div 
-          className="certificates-grid"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.1 }
-            }
-          }}
-        >
-          {certificates.map((cert, index) => (
-            <motion.div
-              key={index}
-              className="certificate-card"
-              layoutId={`card-${index}`}
-              onClick={() => setSelectedId(index)}
-              variants={{
-                hidden: { y: 20, opacity: 0 },
-                visible: { y: 0, opacity: 1 }
-              }}
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              <div className="card-content">
-                <h3>{cert.title}</h3>
-                <div className="issuer-date">
-                  <span className="issuer">{cert.issuer}</span>
-                  <span className="date">{cert.date}</span>
-                </div>
-                <p className="description">{cert.description}</p>
-                {cert.credential && (
-                  <div className="credential-id">
-                    <span>Credential ID:</span>
-                    <code>{cert.credential}</code>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </motion.div>
-
-      <AnimatePresence>
-        {selectedId !== null && (
-          <motion.div 
-            className="certificate-modal"
-            initial={{ backgroundColor: "rgba(0,0,0,0)" }}
-            animate={{ backgroundColor: "rgba(0,0,0,0.7)" }}
-            exit={{ backgroundColor: "rgba(0,0,0,0)" }}
-            onClick={() => setSelectedId(null)}
-          >
-            <motion.div 
-              className="modal-content"
-              layoutId={`card-${selectedId}`}
-              onClick={(e) => e.stopPropagation()}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25 }}
-            >
-              {certificates[selectedId].image && (
-                <div className="certificate-image">
-                  <img 
-                    src={certificates[selectedId].image} 
-                    alt={certificates[selectedId].title} 
-                  />
-                </div>
-              )}
-              <div className="modal-details">
-                <h3>{certificates[selectedId].title}</h3>
-                <div className="issuer-date">
-                  <span className="issuer">{certificates[selectedId].issuer}</span>
-                  <span className="date">{certificates[selectedId].date}</span>
-                </div>
-                <p className="description">{certificates[selectedId].description}</p>
-                {certificates[selectedId].credential && (
-                  <div className="credential-id">
-                    <span>Credential ID:</span>
-                    <code>{certificates[selectedId].credential}</code>
-                  </div>
-                )}
-                <button 
-                  className="close-button"
-                  onClick={() => setSelectedId(null)}
-                >
-                  Close
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        {/* Certificate 2 */}
+        <div className="cert-card">
+          <div className="cert-header">
+            <h2>Developing Front-End Apps with React</h2>
+            <div className="cert-issuer">IBM</div>
+            <div className="cert-date">Issued: June 2025</div>
+          </div>
+          <div className="cert-body">
+            <p className="cert-desc">Professional certification demonstrating expertise in designing distributed systems on AWS.</p>
+            <div className="cert-tags">
+              <span className="cert-tag box-5">AWS</span>
+              <span className="cert-tag box-6">CloudFormation</span>
+              <span className="cert-tag box-7">S3</span>
+              <span className="cert-tag box-8">Lambda</span>
+              <span className="cert-tag box-9">EC2</span>
+            </div>
+          </div>
+          <div className="cert-footer">
+            <a href="https://www.coursera.org/account/accomplishments/records/DWTAT3K7YJ8E" className="cert-link">View Certificate ↗</a>
+            <span className="cert-id">ID: DWTAT3K7YJ8E</span>
+          </div>
+        </div>
+        
+        {/* Certificate 3 */}
+        <div className="cert-card">
+          <div className="cert-header">
+            <h2>Advanced JavaScript</h2>
+            <div className="cert-issuer">Developing Back-End Apps with Node.js and Express</div>
+            <div className="cert-date">Issued: June 2025</div>
+          </div>
+          <div className="cert-body">
+            <p className="cert-desc">Mastery of modern JavaScript concepts including ES6+, asynchronous programming, and design patterns.</p>
+            <div className="cert-tags">
+              <span className="cert-tag box-10">JavaScript</span>
+              <span className="cert-tag box-11">ES6+</span>
+              <span className="cert-tag box-1">Async/Await</span>
+              <span className="cert-tag box-2">Design Patterns</span>
+            </div>
+          </div>
+          <div className="cert-footer">
+            <a href="https://www.coursera.org/account/accomplishments/records/3WEPSCSJ3FFM" className="cert-link">View Certificate ↗</a>
+            <span className="cert-id">ID: 3WEPSCSJ3FFM</span>
+          </div>
+        </div>
+        
+        {/* Certificate 4 */}
+        <div className="cert-card">
+          <div className="cert-header">
+            <h2>UI/UX Design Specialization</h2>
+            <div className="cert-issuer">California Institute of the Arts</div>
+            <div className="cert-date">Issued: November 2022</div>
+          </div>
+          <div className="cert-body">
+            <p className="cert-desc">Comprehensive training in user-centered design principles, prototyping, and usability testing.</p>
+            <div className="cert-tags">
+              <span className="cert-tag box-3">Figma</span>
+              <span className="cert-tag box-4">User Research</span>
+              <span className="cert-tag box-5">Prototyping</span>
+              <span className="cert-tag box-6">Accessibility</span>
+            </div>
+          </div>
+          <div className="cert-footer">
+            <a href="#" className="cert-link">View Certificate ↗</a>
+            <span className="cert-id">ID: UX-2022-CALARTS-001</span>
+          </div>
+        </div>
+        
+        {/* Certificate 5 */}
+        <div className="cert-card">
+          <div className="cert-header">
+            <h2>DevOps Engineering</h2>
+            <div className="cert-issuer">Microsoft Azure</div>
+            <div className="cert-date">Issued: September 2022</div>
+          </div>
+          <div className="cert-body">
+            <p className="cert-desc">Certification in implementing DevOps practices using Azure DevOps services and infrastructure.</p>
+            <div className="cert-tags">
+              <span className="cert-tag box-7">Azure</span>
+              <span className="cert-tag box-8">CI/CD</span>
+              <span className="cert-tag box-9">Docker</span>
+              <span className="cert-tag box-10">Kubernetes</span>
+            </div>
+          </div>
+          <div className="cert-footer">
+            <a href="#" className="cert-link">View Certificate ↗</a>
+            <span className="cert-id">ID: AZ-DEVOPS-2022-001</span>
+          </div>
+        </div>
+        
+        {/* Certificate 6 */}
+        <div className="cert-card">
+          <div className="cert-header">
+            <h2>Data Structures & Algorithms</h2>
+            <div className="cert-issuer">Stanford University</div>
+            <div className="cert-date">Issued: July 2022</div>
+          </div>
+          <div className="cert-body">
+            <p className="cert-desc">Advanced certification in algorithm design and analysis, with practical problem-solving applications.</p>
+            <div className="cert-tags">
+              <span className="cert-tag box-11">Algorithms</span>
+              <span className="cert-tag box-1">Data Structures</span>
+              <span className="cert-tag box-2">Complexity</span>
+              <span className="cert-tag box-3">Problem Solving</span>
+            </div>
+          </div>
+          <div className="cert-footer">
+            <a href="#" className="cert-link">View Certificate ↗</a>
+            <span className="cert-id">ID: DSA-2022-STANF-001</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

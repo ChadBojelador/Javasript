@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import picture from '../assets/picture.svg';
 import CustomCursor from '../Components/CustomCursor';
 import Navigation from '../Components/Navigation';
-import Tagline from '../Components/Tagline';
+import Arrows from '../Components/Arrows';
 import Signages from '../Components/Signages';
+import '../Styles/index.css'
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -27,6 +28,7 @@ function App() {
   }, []);
 
   return (
+    <div className='main-contain'>
     <div className="App">
       <CustomCursor />
       <motion.div
@@ -59,7 +61,6 @@ function App() {
               </motion.p>
             </motion.div>
           </aside>
-
           <section>
             <motion.div
               className="title-container"
@@ -110,22 +111,30 @@ function App() {
                   whileHover={{ scale: 1.05 }}
                 >
                   <p>{tech}</p>
+                     
+                     
                 </motion.div>
               ))}
             </motion.div>
-      <Signages></Signages>
             <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
-              <Tagline />
+
+     <Signages></Signages>
+
             </motion.div>
-      
+          
+                          <Arrows/>
           </section>
+
           
         </div>
+
       </motion.div>
+ 
+    </div>
     </div>
   );
 }

@@ -1,5 +1,9 @@
 @import url('https://fonts.cdnfonts.com/css/poppins');
 
+*{
+  margin: 0;
+  padding: 0;;
+}
 body {
   background-color: rgb(21, 19, 18);
 
@@ -54,8 +58,8 @@ header{
 .title-container{
   display: flex;
   flex-direction: column;
-  line-height: 0em;
-  padding-top: 2em;
+  line-height: 5rem;
+  padding-top: 1em;
 }
 .title-container p{
   color: #99908f;
@@ -67,6 +71,7 @@ header{
 }
 .p-container{
   width: 35vw;
+  padding-top: 1.5rem;
 }
 .p-container p {
   font-size: 1.2rem; /* Changed from fixed 15px */
@@ -76,7 +81,7 @@ header{
 }
 
 .header-container{
-  height: 100vh;
+  height: 80vh;
   width: 95vw;
   
 }
@@ -98,15 +103,15 @@ header{
   transform: scale(1.2);
 }
 
-
-section{
+.main-contain section{
    padding: 20px;
-    margin-top: 4vh;
+    margin-top: 1vh;
     margin-left: 7vw;
       flex: 1;
-    height: 130vh; /* Adjust based on your header height */
+    height: 100vh; /* Adjust based on your header height */
   overflow-y: auto;
     overflow: hidden;
+    position: relative;
 }
 .header-container2{
   display: flex;
@@ -124,12 +129,12 @@ section{
   padding: 2rem;
   color: white;
 }
-aside{
+.main-contain aside{
   position: sticky;
   display: flex;
   flex-direction: column;
   align-items: center;
-    height: 100vh;
+    height: 80vh;
     width: 50vh;
     margin-left: 10vw;
     margin-top: 5vh;
@@ -222,27 +227,27 @@ aside * {
   display: flex;
   gap: 0.5rem; /* Reduced gap */
   flex-wrap: wrap;
-  width: 100%;
+
   max-width: 600px;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   font-family: 'Poppins';
   font-weight: 500; /* Reduced margin */
 }
 .box {
-  padding: 0.2rem 0.8rem; /* Reduced vertical padding */
-  border-radius: 15px; /* Slightly smaller radius */
-  font-size: 0.65rem; /* Slightly smaller font size */
-  line-height: 0.3; /* Tighter line height */
-  text-align: center;
+  padding: 0.4rem 1rem;
+  border-radius: 25px;
+  font-size: 0.75rem;
+  line-height: 1.7em; /* Fix: better vertical spacing */
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
-  color: #000;
-  white-space: nowrap;
-  min-height: 20px; /* Set minimum height */
   display: flex;
   align-items: center;
   justify-content: center;
- 
+  text-align: center;
+  color: #000;
+  white-space: nowrap;
 }
+
 
 
 .box-1 { background-color: #f46c38; padding-left: 2em;padding-right: 2em;}
