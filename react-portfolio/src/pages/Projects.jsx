@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import CustomCursor from '../Components/CustomCursor';
 import Navigation from '../Components/Navigation';
 import '../Styles/Projects.css';
-
+import pasyentrack from '../assets/pasyentrack.mp4'
 gsap.registerPlugin(ScrollTrigger);
 
 function Projects() {
@@ -246,18 +246,18 @@ function Projects() {
                   {/* Right Column (just fades videos in/out) */}
                   <div className="tabs_right">
                     <div className={`tabs_video ${currentIndex === 0 ? 'is-1' : ''}`}>
-                      <div
-                        className="video-placeholder"
-                        style={{ background: 'linear-gradient(135deg,rgb(232, 232, 232) 0%,rgb(0, 126, 135) 100%)' }}
-                      >
-                        <div className="placeholder-text">Design Showcase</div>
-                      </div>
-                      <img
-                        src="https://via.placeholder.com/100"
-                        loading="lazy"
-                        alt="Award badge"
-                        className="tabs_video-gda-badge"
-                      />
+                     <video
+  className="video-placeholder"
+  style={{ background: 'linear-gradient(135deg,rgb(232, 232, 232) 0%,rgb(0, 126, 135) 100%)' }}
+  src={pasyentrack}
+  autoPlay
+  loop
+  muted
+  playsInline
+
+/>
+            
+            
                     </div>
                     <div className={`tabs_video ${currentIndex === 1 ? 'is-1' : ''}`}>
                       <div
