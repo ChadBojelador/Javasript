@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import picture from '../assets/picture.svg';
 import CustomCursor from '../Components/CustomCursor';
 import Navigation from '../Components/Navigation';
-import Arrows from '../Components/Arrows';
+
 import Signages from '../Components/Signages';
 import '../Styles/index.css'
 const containerVariants = {
@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   return (
-    <div className='main-contain'>
+    <div className='main-contain' >
     <div className="App">
       <CustomCursor />
       <motion.div
@@ -39,8 +39,8 @@ function App() {
       >
         <Navigation />
 
-        <div className="header-container2">
-          <aside>
+        <div className="header-container2" style={{zIndex: 1}}>
+          <aside style={{zIndex: 1}}>
             <motion.img
               className="picture"
               src={picture}
@@ -61,7 +61,9 @@ function App() {
               </motion.p>
             </motion.div>
           </aside>
-          <section>
+            <div className="content-wrapper">
+          <section style={{zIndex: 1}}>
+            <div className='content-container'>
             <motion.div
               className="title-container"
               variants={containerVariants}
@@ -126,10 +128,10 @@ function App() {
 
             </motion.div>
           
-                          <Arrows/>
+                       </div>
           </section>
 
-          
+          </div>
         </div>
 
       </motion.div>

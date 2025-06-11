@@ -2,11 +2,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import ProjectPanel from '../Components/ProjectPanel';
 import CustomCursor from '../Components/CustomCursor';
 import Navigation from '../Components/Navigation';
 import '../Styles/Projects.css';
-import pasyentrack from '../assets/pasyentrack.mp4'
+import pasyentrack from '../assets/pasyentrack.mp4';
+import smw from '../assets/smw.mp4';
+
 gsap.registerPlugin(ScrollTrigger);
 
 function Projects() {
@@ -16,8 +18,25 @@ function Projects() {
   const tabsSectionRef = useRef(null);
   const introTextRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  // 1) “PROJECT / PROFILE” IntersectionObserver remains unchanged
+  const videoSources = [
+  pasyentrack,
+  smw
+];
+   const projects = [
+        {
+            title: "Medical Record Management System Using C++ and Qt Framework",
+            details: "The Medical Record Management System, developed using C++ with a graphical user interface, features a stacked widget design that allows smooth navigation between login, patient data entry, and record viewing sections. It combines a MySQL database for persistent data storage with a Binary Search Tree (BST) for efficient in-memory operations such as searching, insertion, and deletion of patient records.",
+            videoSrc: videoSources[0],
+            link:"https://github.com/ChadBojelador/Medical-Record-Management-System"
+        },
+        {
+            title: "Smart Waste Bin with Plastic Shredder",
+            details: "Powered by Arduino Uno R3 components, the system detects and shreds plastic while it records the shredding process and logs data in real-time to Google Sheets via Google Apps Script. Notably, this system has been tested and validated by 10 engineers from diverse fields, ensuring its interdisciplinary applicability.",
+            videoSrc: videoSources[1],
+            link:"https://drive.google.com/file/d/1CuGlOQnRn8RLUau6sRM7JuAmdNSCld7J/view?usp=drive_link"
+        }
+    ];
+  // IntersectionObserver for "PROJECT / PROFILE"
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -38,25 +57,23 @@ function Projects() {
     };
   }, []);
 
-  // 2) “Which tab is active?” scroll listener remains unchanged
+  // Scroll listener for determining active tab
   useEffect(() => {
     const handleScroll = () => {
       if (!tabsSectionRef.current) return;
       const scrollY = window.scrollY;
       const sectionTop = tabsSectionRef.current.offsetTop;
       const inSection = scrollY - sectionTop;
-      // 1.5× viewport height per tab
       const idx = Math.floor(inSection / (window.innerHeight * 1.5));
-      setCurrentIndex(Math.min(2, Math.max(0, idx)));
+      setCurrentIndex(Math.min(1, Math.max(0, idx)));
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 3) Fix Pinning Logic for GSAP ScrollTrigger
+  // ScrollTrigger pinning
   useEffect(() => {
-    // A) Pin the intro text until the bottom of .intro-wrapper passes viewport top
     if (introTextRef.current) {
       ScrollTrigger.create({
         trigger: '.intro-wrapper',
@@ -68,21 +85,19 @@ function Projects() {
       });
     }
 
-    // B) Pin the tabs_left, but only after scrolling 5 vh past the top of the section
     if (tabsSectionRef.current) {
       const tabsLeftEl = tabsSectionRef.current.querySelector('.tabs_left');
 
       ScrollTrigger.create({
         trigger: tabsSectionRef.current,
-        start: 'top 5vh',       // ← instead of "top top+=5vh"
-        end: 'bottom bottom',    // stay pinned until the section’s bottom hits viewport bottom
+        start: 'top 5vh',
+        end: 'bottom bottom',
         pin: tabsLeftEl,
         pinSpacing: false,
         markers: false,
       });
     }
 
-    // Cleanup
     return () => {
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };
@@ -112,178 +127,53 @@ function Projects() {
       {/* PROJECT / PROFILE */}
       <div className="ct" ref={ctRef}>
         <div className="split-text-container">
-          <span className="text-part left" ref={textLeftRef}>PROJECT</span>
+          <span className="text-part left" ref={textLeftRef} >PROJECT </span>
           <span className="text-part right" ref={textRightRef}>PROFILE</span>
         </div>
       </div>
 
-      {/* New Intro Section */}
+      {/* Intro Section */}
       <div className="intro-wrapper">
         <div className="intro" style={{ zIndex: 1 }}>
           <div className="text-align-center" id="js-pin" ref={introTextRef}>
             <div className="max-width-small align-center">
               <div className="margin-bottom margin-small">
                 <h2 className="heading-style-h3">
-                  <span className="light-green-underline">INNOVATIVE SOLUTIONS AND MEASURABLE IMPACT</span>
+                  <span className="light-green-underline">
+                    INNOVATIVE SOLUTIONS AND MEASURABLE IMPACT
+                  </span>
                 </h2>
               </div>
-              <div className='des'>
-              <p className="text-size-medium">
-                I build scalable and user-centered applications designed to solve real-world problems. My projects span various domains, from system management tools to productivity and data-driven applications. I focus on delivering clean, efficient, and maintainable solutions that prioritize functionality and user experience. Every project is an opportunity to innovate, learn, and create meaningful impact through technology.
-              </p>
+              <div className="des">
+                <p className="text-size-medium">
+                  I build scalable and user-centered applications designed to solve real-world problems.
+                  My projects span various domains, from system management tools to productivity and data-driven applications.
+                  I focus on delivering clean, efficient, and maintainable solutions that prioritize functionality and user experience.
+                  Every project is an opportunity to innovate, learn, and create meaningful impact through technology.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Tabs Section */}
-      <section className="section_tabs" ref={tabsSectionRef}>
-        <div className="padding-section-large">
-          <div className="tabs_height">
-            <div className="tabs_sticky-wrapper">
-              <div className="tabs_container">
-                <div className="tabs_component">
-                  {/* Left Column (gets pinned) */}
-                  <div className="tabs_left">
-<div className="tabs_left-top">
-  {/* Tab 1 */}
-  <div className={`tabs_let-content ${currentIndex === 0 ? 'is-1' : ''}`}>
-    <div className="tabs_let-content__title">
-      <h2 className="text-color-gray100">
-        Medical Record <span className="text-color-green">Management System</span> using C++ and QT Framework
-      </h2>
-      <div className="tabs_line" />
-    </div>
-    <div className="tabs_let-content__description">
-      <p className="paragraph">
-       The Medical Record Management System, developed using C++ with a graphical user interface, features a stacked widget design that allows smooth navigation between login, patient data entry, and record viewing sections. It combines a MySQL database for persistent data storage with a Binary Search Tree (BST) for efficient in-memory operations such as searching, insertion, and deletion of patient records.
-      </p>
-    </div>
-  </div>
+      {/* Placeholder space (could be replaced with actual content or tabs section) */}
+      <div className="app-container" style={{ height: '250vh' , backgroundColor: 'black', }}>
 
-  {/* Tab 2 */}
-  <div className={`tabs_let-content ${currentIndex === 1 ? 'is-1' : ''}`}>
-    <div className="tabs_let-content__title">
-      <h2 className="text-color-gray100">
-        Smart Waste Bin with <span className="text-color-green">Plastic Shredder</span>
-      </h2>
-      <div className="tabs_line" />
-    </div>
-    <div className="tabs_let-content__description">
-      <div className="text-size-small text-color-gray400">
-        <p>
-          A Research Project Presented to <br />
-          The Faculty of Southern Luzon State University Laboratory School
-        </p>
-        <br/>
-        <p className="paragraph">
-         This project presents a Smart Waste Bin with an integrated plastic shredder that automatically detects and shreds plastic for efficient waste management and sustainability. Powered by Arduino Uno R3 components, the system automates shredding and logs data in real-time via Google Sheets using Google Apps Script, promoting responsible disposal through smart technology.
-
-
-        </p>
-      </div>
-    </div>
-  </div>
-
-  {/* Tab 3 */}
-  <div className={`tabs_let-content ${currentIndex === 2 ? 'is-1' : ''}`}>
-    <div className="tabs_let-content__title">
-      <h2 className="text-color-gray100">
-        Sustainable solutions, <span className="text-color-green">built to last</span>
-      </h2>
-      <div className="tabs_line" />
-    </div>
-    <div className="tabs_let-content__description">
-      <p className="text-size-small text-color-gray400">
-        We craft solutions with maintainability and future growth in mind.
-      </p>
-    </div>
-  </div>
-</div>
-                    <div className="tabs_left-bottom">
-                      <div className="button is-green is-secondary">
-                        <div className="button-text">View projects</div>
-                        <div className="button-circle-wrapper">
-                          <div className="button-icon _1">
-                            <svg height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path
-                                d="M4.66699 11.3332L11.3337 4.6665"
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <path
-                                d="M4.66699 4.6665H11.3337V11.3332"
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          </div>
-                          <div className="button-icon _2">
-                            <svg height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path
-                                d="M4.66699 11.3332L11.3337 4.6665"
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <path
-                                d="M4.66699 4.6665H11.3337V11.3332"
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          </div>
-                        </div>
-                        <div className="button-circlee background-color-green" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right Column (just fades videos in/out) */}
-                  <div className="tabs_right">
-                    <div className={`tabs_video ${currentIndex === 0 ? 'is-1' : ''}`}>
-                     <video
-  className="video-placeholder"
-  style={{ background: 'linear-gradient(135deg,rgb(232, 232, 232) 0%,rgb(0, 126, 135) 100%)' }}
-  src={pasyentrack}
-  autoPlay
-  loop
-  muted
-  playsInline
-
-/>
+            <h1 className="header">PROJECT SHOWCASE</h1>
             
-            
-                    </div>
-                    <div className={`tabs_video ${currentIndex === 1 ? 'is-1' : ''}`}>
-                      <div
-                        className="video-placeholder"
-                        style={{ background: 'linear-gradient(135deg,rgb(232, 232, 232) 0%,rgb(0, 126, 135) 100%)' }}
-                      >
-                        <div className="placeholder-text">Tech Stack</div>
-                      </div>
-                    </div>
-                    <div className={`tabs_video ${currentIndex === 2 ? 'is-1' : ''}`}>
-                      <div
-                        className="video-placeholder"
-                        style={{ background: 'linear-gradient(135deg, rgb(232, 232, 232) 0%,rgb(0, 126, 135) 100%)' }}
-                      >
-                        <div className="placeholder-text">Architecture</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            {projects.map((project, index) => (
+                <ProjectPanel 
+                    key={index}
+                    title={project.title}
+                    details={project.details}
+                         videoSrc={project.videoSrc}
+                           link={project.link}
+                />
+            ))}
+ 
+
         </div>
-      </section>
-
-      <div style={{ height: '50vh' }} />
     </div>
   );
 }

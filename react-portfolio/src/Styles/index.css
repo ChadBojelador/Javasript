@@ -83,7 +83,7 @@ header{
 .header-container{
   height: 80vh;
   width: 95vw;
-  
+  margin-top: 7vh;
 }
 
 .icon {
@@ -108,14 +108,18 @@ header{
     margin-top: 1vh;
     margin-left: 7vw;
       flex: 1;
-    height: 100vh; /* Adjust based on your header height */
-  overflow-y: auto;
-    overflow: hidden;
-    position: relative;
+ /* Adjust based on your header height */
+
+    overflow: visible;
+    position: absolute;
 }
-.header-container2{
+.header-container2 {
   display: flex;
-  margin-top: 6vh;
+  gap: 2rem;
+  position: absolute;
+}
+.content-wrapper {
+  flex: 1;
 }
 .content-sections {
   display: flex;
@@ -268,21 +272,42 @@ aside * {
   }
 }
 @media (max-width: 768px) {
-    body {
-    overflow: auto;
-  }
-  .header-container2 {
-    flex-direction: column;
-    height: auto;
+  
+
+  .header-container {
+    justify-content: center;
+    display: flex ; /* Allow container to expand */
   }
 
+  .header-container2 {
+    flex-direction: column;
+    width: ;
+    height: 70vh;
+    margin-top: 2em;
+  }
   aside {
-    position: static;
+    position: sticky;
+    top: 0;
     width: 90%;
-    height: auto;
-    margin: 2em auto 0;
-    padding: 20px;
-    pointer-events: auto;
+    height: 50%;
+    margin: 0 auto 2vh;
+    padding: 15px;
+    order: 1;
+    z-index: 10;        /* ← ensures it stays above the section */
+    background-color: #ffffff;
+    padding-bottom: 0;
+  }
+  .content-wrapper {
+    order: 2; /* Ensure content comes after */
+    width: 100%;
+    margin-top: 0;
+  }
+section {
+    margin-left: 0;
+    padding: 10px;
+
+    height: 10vh;
+
   }
 
   .picture {
@@ -291,19 +316,19 @@ aside * {
     max-width: 200px;
   }
 
-  section {
-     height: auto;
-    overflow: visible;
-    margin-left: 0;
-    padding: 10px;
+  .description-pic h1 {
+    font-size: 6vw;
   }
 
   .Title {
     font-size: 10vw;
+    line-height: 1.2;
+    margin-top: 1vh;
   }
 
-  #title1 {
-    -webkit-text-stroke: 1px #353334;
+  .title-container {
+    line-height: 3rem;
+    padding-top: 0;
   }
 
   .title-container p {
@@ -314,58 +339,16 @@ aside * {
     width: 100%;
   }
 
-  .description-pic h1 {
-    font-size: 1.5rem;
-  }
-
-  .description-pic p {
+  .p-container p {
     font-size: 1rem;
   }
 
-  /* Optional: Improve nav items for mobile */
-  .list {
-    width: 40px;
-    height: 40px;
+  .boxes {
+    gap: 0.4rem;
   }
 
-  nav {
-    padding-right: 0;
-    margin-top: 1vh;
+  .box {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.7rem;
   }
-
-  .p-container p {
-    font-size: 1rem; /* Adjust for mobile */
-    line-height: 1.6; /* Better mobile readability */
-    max-width: 90%; /* Prevent edge-to-edge text */
-    margin: 0.8rem auto; /* Center align and add spacing */
-  }
-
-  /* Add this to handle text wrapping */
-  .title-container {
-    overflow-wrap: break-word;
-    word-break: keep-all;
-  }
-   .header-container2 {
-    flex-direction: column;
-     height: 100vh;
-  }
-
-  aside {
-    position: static;
-    height: auto;
-    width: 100%;
-    margin: 1rem 0;
-  }
-
-  section {
-    height: auto;
-    margin: 0;
-    overflow-y: visible;
-  }
-
-  .content-part {
-    min-height: auto;
-    padding: 2rem 1rem;
-  }
-
 }

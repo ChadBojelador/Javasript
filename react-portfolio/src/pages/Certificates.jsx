@@ -52,7 +52,7 @@ const Certificates = () => {
             <div className="cert-date">Issued: June 2025</div>
           </div>
           <div className="cert-body">
-            <p className="cert-desc">ChatGPT said:
+            <p className="cert-desc">
 The Cloud Support Associate Professional Certificate is a credential that validates foundational skills in cloud computing and technical support for cloud-based services.</p>
             <div className="cert-tags">
               <span className="cert-tag box-1">AWS</span>
